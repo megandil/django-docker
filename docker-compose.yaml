@@ -1,0 +1,26 @@
+version: "3.1"
+
+services:
+  ddbb:
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: django
+      MARIADB_PASSWORD: django
+      MARIADB_DATABASE: django
+
+  django:
+    container_name: django
+    image: megandil/django:v1
+    restart: always
+    environment:
+      DJANGO_BD: django
+      DJANGO_BD_USER: django
+      DJANGO_BD_PASSWORD: django
+      DJANGO_BD_HOST: mariadb
+    ports:
+      - 80:8000
+    depends_on:
+      - ddbb
