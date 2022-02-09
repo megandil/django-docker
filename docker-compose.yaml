@@ -10,6 +10,8 @@ services:
       MARIADB_USER: django
       MARIADB_PASSWORD: django
       MARIADB_DATABASE: django
+    volumes:
+      - /home/daniel/volumenes_docker/mariadb_django:/var/lib/mysql
 
   django:
     container_name: django
@@ -24,3 +26,7 @@ services:
       - 80:8000
     depends_on:
       - ddbb
+    volumes:
+      - vol_django:/usr/share/app/django_tutorial/polls/templates
+volumes:
+  vol_django:
