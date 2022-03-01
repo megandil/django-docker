@@ -23,7 +23,7 @@ pipeline {
                 }
                 stage('Cambio Settings') {
                 steps {
-                    sh 'cp settings_temp.py build/django_tutorial/settings.py'
+                    sh 'cp settings_temp.py build/django_tutorial/django_tutorial/settings.py'
                     }
                 }
                 stage('Test'){
