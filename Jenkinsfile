@@ -62,6 +62,13 @@ pipeline {
                         sh "docker rmi $IMAGEN:$BUILD_NUMBER"
                         }
                 }
+                stage('Correo') {
+                    steps {
+                            emailext body: 'Test Message',
+                            subject: 'Test Subject',
+                            to: 'megadani00@hotmail.com'
+                        }
+                }
             }
         }
     }
