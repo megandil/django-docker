@@ -9,6 +9,6 @@ ENV DJANGO_BD_PASSWORD=django
 ENV DJANGO_BD_HOST=mariadb
 ENV SUPERUSER_NAME=admin
 ENV SUPERUSER_PASS=admin
-COPY docker-entrypoint.sh /usr/share/app
+COPY build/docker-entrypoint.sh /usr/share/app
 EXPOSE 8000
 CMD [ "bash", "/usr/share/app/docker-entrypoint.sh"]
