@@ -64,9 +64,9 @@ pipeline {
                 }
                 stage('Correo') {
                     steps {
-                            emailext body: 'Test Message',
-                            subject: 'Test Subject',
-                            to: 'megadani00@hotmail.com'
+                            emailext body: 'Pipeline ejecutado!',
+                            subject: 'Jenkins Daniel Mesa',
+                            to: 'danimesamejias@gmail.com'
                         }
                 }
             }
