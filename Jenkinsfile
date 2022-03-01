@@ -21,6 +21,11 @@ pipeline {
                     sh 'cd build/django_tutorial && pip install -r requirements.txt'
                     }
                 }
+                stage('Cambio Settings') {
+                steps {
+                    sh 'cp settings_temp.py build/django_tutorial/settings.py'
+                    }
+                }
                 stage('Test'){
                 steps {
                     sh 'cd build/django_tutorial && python3 manage.py test'
