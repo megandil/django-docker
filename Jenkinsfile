@@ -12,17 +12,17 @@ pipeline {
             stages {
                 stage('Clone') {
                     steps {
-                        git branch:'master',url:'https://github.com/megandil/django_tutorial.git'
+                        git branch:'master',url:'https://github.com/megandil/django-docker'
                     }
                 }
                 stage('Install') {
                 steps {
-                    sh 'pip install -r requirements.txt'
+                    sh 'cd build/django_tutorial && pip install -r requirements.txt'
                     }
                 }
                 stage('Test'){
                 steps {
-                    sh 'python3 manage.py test'
+                    sh 'cd build/django_tutorial && python3 manage.py test'
                     }
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
             stages {
                 stage('Clone') {
                     steps {
-                        git branch: "main", url: 'https://github.com/megandil/jenkins-docker'
+                        git branch: "main", url: 'https://github.com/megandil/django-docker'
                     }
                 }
                 stage('Build') {
