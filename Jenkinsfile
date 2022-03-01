@@ -23,7 +23,7 @@ pipeline {
                 }
                 stage('Test'){
                 steps {
-                    sh 'python3 manage.py test'
+                    sh 'cd build/django_tutorial && python3 manage.py test'
                     }
                 }
             }
