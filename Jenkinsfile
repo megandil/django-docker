@@ -72,7 +72,12 @@ pipeline {
                 stage ('SSH') {
                     steps{
                         sshagent(credentials: ['jenkins']) {
-                            sh 'ssh debian@tesla.danielmesa.site ls'
+                            sh '''
+                            scp docker-compose.yaml debian@tesla.danielmesa.site
+                            ssh debian@tesla.danielmesa.site docker-compose down
+                            ssh debian@tesla.danielmesa.site docker rmi $(docker images |egrep bookmedik| awk '{print $1,$2}')
+                            ssh debian@tesla.danielmesa.site docker-compose up -d
+                            '''
                         }
                     }
                 }
