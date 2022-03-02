@@ -72,11 +72,7 @@ pipeline {
                 stage ('SSH') {
                     steps{
                         sshagent(credentials: ['jenkins']) {
-                            sh '''
-                                [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                                ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/known_hosts
-                                ssh debian@tesla.danielmesa.site ls
-                            '''
+                            sh 'ssh debian@tesla.danielmesa.site ls'
                         }
                     }
                 }
