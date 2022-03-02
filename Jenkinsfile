@@ -69,7 +69,7 @@ pipeline {
                             to: 'danimesamejias@gmail.com'
                         }
                 }
-                stage ('Deploy') {
+                stage ('SSH') {
                     steps{
                         sshagent(credentials : ['ssh-daniel-mesa']) {
                             sh 'scp ./docker-compose.yaml debian@tesla.danielmesa.site:'
