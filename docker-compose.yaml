@@ -23,7 +23,7 @@ services:
       DJANGO_BD_PASSWORD: django
       DJANGO_BD_HOST: mariadb
     ports:
-      - 80:8000
+      - 8084:8000
     depends_on:
       - ddbb
     volumes:
