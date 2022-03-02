@@ -75,6 +75,7 @@ pipeline {
                             sh 'scp ./docker-compose.yaml debian@tesla.danielmesa.site:'
                         }
                     }
+                }
             }
         }
     }
