@@ -15,7 +15,7 @@ services:
 
   django:
     container_name: django
-    image: megandil/django:$BUILD_NUMBER
+    image: megandil/myapp:$BUILD_NUMBER
     restart: always
     environment:
       DJANGO_BD: django
