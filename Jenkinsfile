@@ -70,7 +70,7 @@ pipeline {
                             scp docker-compose.yaml debian@tesla.danielmesa.site:
                             scp .env debian@tesla.danielmesa.site:
                             ssh debian@tesla.danielmesa.site docker-compose down
-                            ssh debian@tesla.danielmesa.site docker rmi $(docker images |egrep myapp| awk '{print $1,$2}')
+                            ssh debian@tesla.danielmesa.site docker images -a | grep "megandil/myapp" | awk '{print $3}' | xargs docker rmi
                             ssh debian@tesla.danielmesa.site docker-compose up -d
                             '''
                         }
