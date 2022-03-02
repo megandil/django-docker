@@ -60,7 +60,21 @@ pipeline {
                 stage('Clean Up') {
                     steps {
                         sh "docker rmi $IMAGEN:$BUILD_NUMBER"
+                        sh "echo BUILD_NUMBER=$BUILD_NUMBER > .env"
                         }
+                }
+                stage ('SSH') {
+                    steps{
+                        sshagent(credentials: ['jenkins']) {
+                            sh '''
+                            scp docker-compose.yaml debian@tesla.danielmesa.site:
+                            scp .env debian@tesla.danielmesa.site:
+                            ssh debian@tesla.danielmesa.site docker-compose down
+                            ssh debian@tesla.danielmesa.site docker rmi $(docker images |egrep myapp| awk '{print $1,$2}')
+                            ssh debian@tesla.danielmesa.site docker-compose up -d
+                            '''
+                        }
+                    }
                 }
                 stage('Correo') {
                     steps {
@@ -68,18 +82,6 @@ pipeline {
                             subject: 'Jenkins Daniel Mesa',
                             to: 'danimesamejias@gmail.com'
                         }
-                }
-                stage ('SSH') {
-                    steps{
-                        sshagent(credentials: ['jenkins']) {
-                            sh '''
-                            scp docker-compose.yaml debian@tesla.danielmesa.site
-                            ssh debian@tesla.danielmesa.site docker-compose down
-                            ssh debian@tesla.danielmesa.site docker rmi $(docker images |egrep bookmedik| awk '{print $1,$2}')
-                            ssh debian@tesla.danielmesa.site docker-compose up -d
-                            '''
-                        }
-                    }
                 }
             }
         }
