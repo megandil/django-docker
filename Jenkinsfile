@@ -71,7 +71,7 @@ pipeline {
                 }
                 stage ('SSH') {
                     steps{
-                        sshagent(credentials : ['ssh-daniel-mesa']) {
+                        sshagent(['ssh-daniel-mesa']) {
                             sh 'scp ./docker-compose.yaml debian@tesla.danielmesa.site:'
                         }
                     }
