@@ -71,7 +71,8 @@ pipeline {
                 }
                 stage ('SSH') {
                     steps{
-                        sshagent(['ssh-daniel-mesa']) {
+                        sshagent(credentials : ['ssh-daniel-mesa']) {
+                            sh 'ssh -o StrictHostKeyChecking=no debian@tesla.danielmesa.site uptime'
                             sh 'scp ./docker-compose.yaml debian@tesla.danielmesa.site:'
                         }
                     }
