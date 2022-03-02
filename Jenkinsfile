@@ -69,9 +69,9 @@ pipeline {
                             sh '''
                             scp docker-compose.yaml debian@tesla.danielmesa.site:
                             scp .env debian@tesla.danielmesa.site:
-                            ssh debian@tesla.danielmesa.site docker-compose down
-                            ssh debian@tesla.danielmesa.site "docker images -a | grep "megandil/myapp" | awk '{print $3}' | xargs docker rmi"
-                            ssh debian@tesla.danielmesa.site docker-compose up -d
+                            scp script-django.sh debian@tesla.danielmesa.site:
+                            ssh debian@tesla.danielmesa.site "chmod +x script-django.sh"
+                            ssh debian@tesla.danielmesa.site ./script-django.sh
                             '''
                         }
                     }
