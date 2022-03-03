@@ -76,7 +76,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Enviar Correo') {
+                stage('Enviar Correo Info') {
                     steps {
                             emailext body: 'Pipeline ejecutado!',
                             subject: 'Jenkins Daniel Mesa',
