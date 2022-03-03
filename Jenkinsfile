@@ -11,12 +11,12 @@ pipeline {
                 args '-u root:root'}
             }
             stages {
-                stage('Clone') {
+                stage('Clonar repo') {
                     steps {
                         git branch:'main',url:'https://github.com/megandil/django-docker'
                     }
                 }
-                stage('Install') {
+                stage('Instalar') {
                 steps {
                     sh 'cd build/django_tutorial && pip install -r requirements.txt'
                     }
@@ -36,7 +36,7 @@ pipeline {
         stage("Subir imagen") {
             agent any
             stages {
-                stage('Clone') {
+                stage('Clonar Repo') {
                     steps {
                         git branch: "main", url: 'https://github.com/megandil/django-docker'
                     }
@@ -57,7 +57,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Clean Up') {
+                stage('Limpieza') {
                     steps {
                         sh "docker rmi $IMAGEN:$BUILD_NUMBER"
                         sh "echo BUILD_NUMBER=$BUILD_NUMBER > .env"
